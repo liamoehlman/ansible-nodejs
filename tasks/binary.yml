@@ -1,10 +1,11 @@
-# file: nodejs/tasks/source.yml
+# file: nodejs/tasks/binary.yml
+
 - name: node.js | Download the node.js binary
   get_url:
     url: "{{nodejs_binary_url}}"
     dest: "/tmp/node-v{{nodejs_version}}.tar.gz"
 
-- name: node.js | Unpack the node.js source
+- name: node.js | Unpack the node.js binary archive
   sudo: true
   shell: >
    tar -xvzf /tmp/node-v{{nodejs_version}}.tar.gz &&
