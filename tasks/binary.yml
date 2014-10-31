@@ -1,0 +1,30 @@
+# file: nodejs/tasks/source.yml
+- name: node.js | Download the node.js binary
+  get_url:
+    url: "{{nodejs_binary_url}}"
+    dest: "/tmp/node-v{{nodejs_version}}.tar.gz"
+
+- name: node.js | Unpack the node.js source
+  sudo: true
+  shell: >
+   tar -xvzf /tmp/node-v{{nodejs_version}}.tar.gz &&
+   mv /tmp/node-v{{nodejs_version}}-linux-x64 /usr/local/node-v{{nodejs_version}}
+  args: 
+    creates: "/usr/local/node-v{{nodejs_version}}"
+    chdir: /tmp
+
+- name: node.js | Update the symbolic link to the node.js binary
+  sudo: true
+  file:
+    path: /usr/bin/node
+    src: "/usr/local/node-v{{nodejs_version}}/bin/node"
+    state: link
+    force: yes
+
+- name: node.js | Update the symbolic link to the npm binary
+  sudo: true
+  file:
+    path: /usr/bin/npm
+    src: "/usr/local/node-v{{nodejs_version}}/bin/npm"
+    state: link
+    force: yes

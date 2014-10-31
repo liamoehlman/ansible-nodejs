@@ -9,7 +9,7 @@
 
 - name: node.js | Download the node.js source
   get_url:
-    url: "{{nodejs_url}}"
+    url: "{{nodejs_source_url}}"
     dest: "/tmp/node-v{{nodejs_version}}.tar.gz"
 
 - name: node.js | Unpack the node.js source
