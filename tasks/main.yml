@@ -13,5 +13,5 @@
   changed_when: "node_version.rc != 0 or node_version.stdout != v{{ nodejs_version }}"
   when: nodejs_install_method == "source"
 
-#- include: source.yml
-#  when: nodejs_install_method == "source" and node_version.changed
+- include: source.yml
+  when: nodejs_install_method == "source" and node_version.changed
